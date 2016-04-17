@@ -28,16 +28,6 @@ class Cell
 	def alive?
 		state == 'alive' ? true : false
 	end
-
-	
-
-
-	# generate
-	# initial_conditions
-	# print_grid @arr
-	# 30.times do
-	# 	cycle @arr
-	# 	print_grid @arr
 end  ## END CLASS CELL
 
 class Grid
@@ -173,14 +163,13 @@ class Grid
 		kills.each{|c| c.kill!}
 		lives.each{|c| c.alive!}
 	end
+end  # END CLASS GRID
 
-
-
+grid = Grid.new
+grid.generate
+grid.initial_conditions
+grid.display
+30.times do
+	grid.cycle
+	grid.display
 end
-
-g = Grid.new
-g.generate
-g.initial_conditions
-g.display
-g.cycle
-g.display
