@@ -1,26 +1,28 @@
 #Conaway's Game of Life
 
-Dependencies:
+##Design Overview:
+
+##Dependencies:
 ```
-$	gem install rspec
-$	gem install factory_girl
-$	gem install curses
+$ gem install rspec
+$ gem install factory_girl
+$ gem install curses
 ```
-To run:
+##To run:
 ```
-$	./run_life.rb
+$ ./run_life.rb
 ```
-	OR
+OR
 ```
-$	./run_life.rb [size_of_board] [number_of_generations] [initial_conditions.txt]
+$ ./run_life.rb [size_of_board] [number_of_generations] [initial_conditions.txt]
 ```
-To run tests:
-from the root directory of the project, run:
+##To run tests:
+From the root directory of the project, run:
 ```
-$	rspec
+$ rspec
 ```
 
-Assumptions:
+##Assumptions:
 	
 
 
