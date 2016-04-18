@@ -68,6 +68,7 @@ class Grid
 	end
 
 	def check cell
+		return 0 if cell.nil?
 		cell.alive? ? 1 : 0
 	end
 
@@ -78,7 +79,6 @@ class Grid
 	end
 
 	def east cell
-		
 		r=cell.row
 		c=cell.column+1
 		c < cells.size ? check(cells[r][c]) : 0
@@ -121,7 +121,6 @@ class Grid
 	end
 
 	def get_neighbors cell
-		
 		total = 0
 		total = self.north(cell) + self.east(cell) + self.south(cell) + self.west(cell) + self.northeast(cell) + self.southeast(cell) + self.southwest(cell) + self.northwest(cell) 
 	end

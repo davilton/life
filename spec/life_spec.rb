@@ -15,6 +15,20 @@ describe Grid do
 		expect(@grid.check(nbr)).to eq(1)
 	end
 
+	it 'returns the number of neighbors' do
+		neighbors = [
+			north = build(:north),
+			south = build(:south),
+			east = build(:east),
+			west = build(:west)
+		]
+		neighbors.each do |n|
+			@grid.cells[n.row][n.column] = n
+		end
+		byebug
+		expect(@grid.get_neighbors(@target)).to eq(4)
+	end
+
 	it 'has a neighbor to the north' do
 		nbr = build(:north)
 		@grid.cells[nbr.row][nbr.column] = nbr
