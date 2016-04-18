@@ -1,14 +1,8 @@
 require 'curses'
 require 'byebug'
 
-## Any live cell with fewer than two live neighbours dies, as if caused by under-population.
-## Any live cell with two or three live neighbours lives on to the next generation.
-## Any live cell with more than three live neighbours dies, as if by over-population.
-## Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
-
 class Cell
 
-	@arr = []
 	attr_accessor :state, :row, :column
 
 	def initialize(state='dead', row='', col='')
@@ -50,26 +44,34 @@ class Grid
 		end
 	end
 
-	def initial_conditions
-		cells[1][1].alive!
-		cells[2][1].alive!
-		cells[3][1].alive!
-		cells[4][4].alive!
-		cells[2][0].alive!
-		cells[2][1].alive!
-		cells[2][2].alive!
+	def initial_conditions(options={})
 
-		# # Glider
-		# cells[0][2].alive!
-		# cells[1][0].alive!
-		# cells[1][2].alive!
-		# cells[2][1].alive!
-		# cells[2][2].alive!
+
+		if options[:conditions]
+			options[:conditions].each do |pos|
+				cells[pos[0]][pos[1]].alive!
+			end
+		else
+			cells[1][1].alive!
+			cells[2][1].alive!
+			cells[3][1].alive!
+			cells[4][4].alive!
+			cells[2][0].alive!
+			cells[2][1].alive!
+			cells[2][2].alive!
+
+			# # Glider
+			# cells[0][2].alive!
+			# cells[1][0].alive!
+			# cells[1][2].alive!
+			# cells[2][1].alive!
+			# cells[2][2].alive!
+		end
 	end
 
 	def start_game(options = {})
 		generate(options[:size])
-		initial_conditions
+		initial_conditions(conditions: options[:initial_conditions])
 		num = options[:generations] || 30
 		num.times do
 			cycle
