@@ -1,5 +1,5 @@
-require './spec_helper'
-require	'../life'
+require_relative 'spec_helper'
+require_relative	'../life'
 require 'byebug'
 
 describe Grid do
