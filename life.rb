@@ -135,7 +135,7 @@ class Grid
 		total = self.north(cell) + self.east(cell) + self.south(cell) + self.west(cell) + self.northeast(cell) + self.southeast(cell) + self.southwest(cell) + self.northwest(cell) 
 	end
 
-	def display cells
+	def display
 		init_screen
 		setpos(0,0)
 		cells.each do |row|
