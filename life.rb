@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby
-
+require 'curses'
 require 'byebug'
 
 ## Any live cell with fewer than two live neighbours dies, as if caused by under-population.
@@ -32,6 +31,7 @@ class Cell
 end  ## END CLASS CELL
 
 class Grid
+	include Curses
 
 	attr_accessor :cells
 
@@ -39,8 +39,8 @@ class Grid
 		@cells = []
 	end
 
-	def generate
-		n = 10
+	def generate(size)
+		!size.nil? && size>=5 ? n=size : n=15
 		for r in (0..n-1)
 			row = []
 			for c in (0..n-1)
@@ -54,7 +54,7 @@ class Grid
 		cells[1][1].alive!
 		cells[2][1].alive!
 		cells[3][1].alive!
-		cells[5][5].alive!
+		cells[4][4].alive!
 		cells[2][0].alive!
 		cells[2][1].alive!
 		cells[2][2].alive!
@@ -65,6 +65,16 @@ class Grid
 		# cells[1][2].alive!
 		# cells[2][1].alive!
 		# cells[2][2].alive!
+	end
+
+	def start_game(options = {})
+		generate(options[:size])
+		initial_conditions
+		num = options[:generations] || 30
+		num.times do
+			cycle
+			display
+		end
 	end
 
 	def check cell
@@ -125,19 +135,23 @@ class Grid
 		total = self.north(cell) + self.east(cell) + self.south(cell) + self.west(cell) + self.northeast(cell) + self.southeast(cell) + self.southwest(cell) + self.northwest(cell) 
 	end
 
-	def display
+	def display cells
+		init_screen
+		setpos(0,0)
 		cells.each do |row|
 			row.each do |cell|
 				if cell.alive?
-					print '# '
+					addstr '# '
+					refresh
 				else
-					print '  '
+					addstr '  '
+					refresh
 				end
 			end
-			puts ""
+			addstr "\n"
+			refresh
 		end
-		cells.size.times{print "=="}
-		puts ""
+		sleep 0.5
 	end
 
 	def cycle
@@ -162,11 +176,3 @@ class Grid
 	end
 end  ## END CLASS GRID
 
-grid = Grid.new
-grid.generate
-grid.initial_conditions
-grid.display
-30.times do
-	grid.cycle
-	grid.display
-end

@@ -1,5 +1,8 @@
 Conaway's Game of Life
 
+Dependencies:
+	gem install rspec
+	gem install curses
 
 To run:
 	./life.rb
@@ -8,3 +11,9 @@ To run:
 
 To run test:
 	rspec life_spec.rb
+
+
+Assumptions:
+	
+
+

@@ -17,15 +17,14 @@ describe Grid do
 
 	it 'returns the number of neighbors' do
 		neighbors = [
-			north = build(:north),
-			south = build(:south),
-			east = build(:east),
-			west = build(:west)
+			build(:north),
+			build(:south),
+			build(:east),
+			build(:west)
 		]
 		neighbors.each do |n|
 			@grid.cells[n.row][n.column] = n
 		end
-		byebug
 		expect(@grid.get_neighbors(@target)).to eq(4)
 	end
 
@@ -76,4 +75,14 @@ describe Grid do
 		@grid.cells[nbr.row][nbr.column] = nbr
 		expect(@grid.northwest(@target)).to eq(1)
 	end
+
+	it 'generates all of the cells' do
+		expect(@grid.generate(15).size).to eq(15)
+	end
+
+	# it 'displays the grid' do
+	# 	@grid.generate(15) && @grid.initial_conditions
+	# 	expect { @grid.display }.to output(/\#/).to_stdout            
+	# end
+
 end
