@@ -80,14 +80,9 @@ describe Grid do
 		expect(@grid.generate(15).size).to eq(15)
 	end
 
-	# it 'displays the grid' do
-	# 	@grid.generate(15) && @grid.initial_conditions
-	# 	expect { @grid.display }.to output(/\#/).to_stdout            
-	# end
-
 	it 'kills a cell with too many neighbors' do
 		# target is alive and has 4 neighbors, it should die next gen
-		@grid.cycle												  # next gen
+		@grid.cycle												  
 		@target = @grid.cells[1][1]
 		expect(@target.alive?).to be(false) # dead
 	end
@@ -99,7 +94,7 @@ describe Grid do
 		@grid.cells[0][1].alive!	
 		@grid.cells[1][2].alive!
 		@grid.cells[2][1].alive!
-		@grid.cycle								# next gen
+		@grid.cycle								
 		@target = @grid.cells[1][1]			
 		expect(@target.alive?).to be(true)
 	end
